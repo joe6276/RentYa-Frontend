@@ -1,0 +1,63 @@
+
+<div class="container">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form" >
+        <div class="content">
+            <div formGroupName="personalDetails">
+                <div class="form-group">
+                    <label for="name"> Name</label>
+                    <input type="text" formControlName="name" />
+                </div>
+                <div class="error" *ngIf="!form.get('personalDetails.name')?.valid && form.get('personalDetails.name')?.touched">
+                     <p *ngIf="form.get('personalDetails.name')!.errors!['required']"> name is required*</p>
+                     <p *ngIf="form.get('personalDetails.name')!.errors!['unallowedName']">Username not allowed!!</p> 
+                </div>
+                <div class="form-group">
+                    <label for="name"> Email</label>
+                    <input type="email" formControlName="email" />
+                    <p class="error" *ngIf="!form.get('personalDetails.email')?.valid && form.get('personalDetails.email')?.touched">Email is required*</p>
+                </div>
+                <div class="form-group">
+                    <label for="name"> Password</label>
+                    <input type="text" formControlName="password" />
+                    <p class="error" *ngIf="!form.get('password')?.valid && form.get('password')?.touched">Password is required*</p>
+                </div>
+            </div>
+    
+    
+            <div class="form-group">
+                <label for="name"> Languages</label>
+               <select formControlName="language">
+                <option value="default">Select a Language</option>
+                    <option value="javascript">Javascript</option>
+                    <option value="java">Java</option>
+                    <option value="c#">C#</option>
+                    <option value="java">Java</option>
+                    <option value="php">Php</option>
+               </select>
+            </div>
+            <div formArrayName="moreLanguages">
+                <p>Add additional Languages</p> 
+                <button type="button"(click)="addLanguage()" >Add Language</button>
+                <div *ngFor="let control of getControls();let i =index" class="err">
+                    <input type="text" [formControlName]="i">
+                    <p class="error" (click)="removeLanguage(i)">X</p>
+                </div>
+            </div>
+            <div class="form-group" *ngFor="let gender of genders">
+                <input type="radio" [value]="gender" formControlName="gender">
+                <label for="name">{{gender}}</label>
+            </div>
+            
+            <div class="form-group">
+                <label for="name"> Message</label>
+               <textarea id="" rows="3" formControlName="message" ></textarea>
+            </div>
+            <!-- /[disabled]="!form.valid -->
+            <button type="submit"  >Submit</button>
+        </div>
+    </form>
+    </div> 
+
+
+    <button (click)="PrePopulate()">Pre-populate</button>
+    <button (click)="PrePopulate1()"> Some Inputs</button>

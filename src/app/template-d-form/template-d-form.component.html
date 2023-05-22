@@ -1,0 +1,49 @@
+
+<div class="container">
+    <form (ngSubmit)="onSubmit()" #form="ngForm" >
+        <div class="content">
+            <div ngModelGroup="personalDetails">
+    
+                <div class="form-group">
+                    <label for="name"> Name</label>
+                    <input type="text" ngModel name="name" required #name="ngModel">
+                </div>
+                <p class="error" *ngIf="!name.valid && name.touched">name is required*</p>
+                <div class="form-group">
+                    <label for="name"> Email</label>
+                    <input type="email"  ngModel name="email"  required  email  #email="ngModel"/>
+                    <p class="error" *ngIf="!email.valid && email.touched">Email is required*</p>
+                </div>
+            </div>
+    
+    
+            <div class="form-group">
+                <label for="name"> Languages</label>
+               <select  [ngModel]="'default'" name="language" required>
+                <option value="default">Select a Language</option>
+                    <option value="javascript">Javascript</option>
+                    <option value="java">Java</option>
+                    <option value="c#">C#</option>
+                    <option value="java">Java</option>
+                    <option value="php">Php</option>
+               </select>
+            </div>
+    
+            <div class="form-group" *ngFor="let gender of genders">
+                <input type="radio" [value]="gender"  ngModel name="gender" required>
+                <label for="name">{{gender}}</label>
+            </div>
+            
+            <div class="form-group">
+                <label for="name"> Message</label>
+               <textarea id="" rows="3"  ngModel name="message" required></textarea>
+            </div>
+            <!-- /[disabled]="!form.valid -->
+            <button type="submit"  >Submit</button>
+        </div>
+    </form>
+    </div> 
+
+
+    <button (click)="PrePopulate()">Pre-populate</button>
+    <button (click)="PrePopulate1()"> Some Inputs</button>
