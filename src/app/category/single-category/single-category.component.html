@@ -1,0 +1,13 @@
+<div class="app" *ngIf="movies.length;else noMovies">
+
+    <div class="item" *ngFor="let movie of movies">
+        <img src={{movie.image}} alt="">
+        <p>{{movie.movieName}}</p>
+        <button (click)="showOne(movie.id)">View More</button>
+    </div>
+ 
+</div>
+
+<ng-template #noMovies>
+    <p><i>No Movies Found</i></p>
+</ng-template>

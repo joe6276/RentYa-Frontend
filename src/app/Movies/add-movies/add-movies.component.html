@@ -1,0 +1,35 @@
+<div class="app">
+    <div class="item">
+        <img src="https://i.ytimg.com/vi/d2k4QAItiSA/maxresdefault.jpg" alt="">
+      
+    </div>
+
+    <form class="item" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="name"> Title</label>
+            <input type="text" formControlName="movieName" />
+        </div>
+        
+        <div class="form-group">
+            <label for="name"> Category </label>
+            <input type="text" formControlName="category" />
+        </div>
+
+        <div class="form-group">
+            <label for="name"> Description</label>
+            <textarea type="text" formControlName="description"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="name"> Image </label>
+            <input type="text" formControlName="image" />
+        </div>
+
+       
+        <button></button>
+    </form>
+ 
+</div>
+
+
+<a (click)="changeRoute()"> Take me Home</a>

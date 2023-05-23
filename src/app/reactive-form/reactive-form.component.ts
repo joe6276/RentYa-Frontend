@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AsyncValidatorFn, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AsyncValidatorFn, FormArray, FormBuilder, 
+  FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive-form',
@@ -12,6 +13,8 @@ import { AsyncValidatorFn, FormArray, FormControl, FormGroup, ReactiveFormsModul
 export class ReactiveFormComponent {
   genders=['Male', 'Female', 'Other']
   unallowedNmes=['Hacker', 'John Doe', 'Jane Doe', 'Test', "Anonymous"]
+
+  options = ['Javascript', 'PHP', 'Java', 'C#', 'C++', 'C', 'Go', 'ML']
   checkUnallowedNames=(control:FormControl):{[x:string]:boolean} |null=>{
     if(this.unallowedNmes.includes(control.value)){
       //error
@@ -20,17 +23,18 @@ export class ReactiveFormComponent {
     return null
   }
 
-
-  form:FormGroup=new FormGroup({
-    personalDetails:new FormGroup({
-      name:new FormControl('', [Validators.required, this.checkUnallowedNames]),
-      password:new FormControl('', [Validators.required, Validators.pattern(`^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$`)]),
-      email:new FormControl(null ,[Validators.required, Validators.email],[<AsyncValidatorFn>this.checkEmail]),
+    constructor(private fb:FormBuilder){}
+  form:FormGroup=this.fb.group({
+    personalDetails:this.fb.group({
+      name:['', [Validators.required, this.checkUnallowedNames]],
+      password:['', [Validators.required, Validators.pattern(`^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$`)]],
+      email:[null ,[Validators.required, Validators.email],[<AsyncValidatorFn>this.checkEmail]],
     }),
-    language:new FormControl('default' ,[Validators.required]),
-    message:new FormControl(null ,[Validators.required]),
-    gender:new FormControl('Male', [Validators.required]),
-    moreLanguages:new FormArray([])
+    language:['default' ,[Validators.required]],
+    message:[null ,[Validators.required]],
+    gender:['Male', [Validators.required]],
+    moreLanguages:this.fb.array([]),
+    langOptions:this.fb.array([])
   })
 
   ngOnInit(): void {
@@ -41,7 +45,7 @@ export class ReactiveFormComponent {
     const promise = new Promise<{[x:string]:boolean} |null>((resolve,reject)=>{
       if(control.value==='test@gmail.com'){
         setTimeout(()=>{
-            resolve({emailUllowed:true})
+            resolve({emailUnallowed:true})
         },1500)
       }else{
         resolve(null)
@@ -53,7 +57,7 @@ export class ReactiveFormComponent {
   
   onSubmit(){
    console.log(this.form);
-   this.form.reset()
+   
   }
   
 
@@ -81,6 +85,14 @@ export class ReactiveFormComponent {
     })
   }
 
+
+  onChange(e:Event){
+   let value= (e.target as HTMLInputElement).value
+   console.log(value);
+    const control= new FormControl(value);
+    (this.form.get('langOptions') as FormArray).push(control)
+    
+  }
   // checkUnallowedNames(control:FormControl):{[x:string]:boolean} |null{
   //   if(this.unallowedNmes.includes(control.value)){
   //     //error

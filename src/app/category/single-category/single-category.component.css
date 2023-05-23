@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-family: sans-serif;
+  }
+  
+
+  button {
+    background: #540075;
+    color: white;
+    border: 1px solid #540075;
+    border-radius: 5px;
+    padding: 0.5rem 2rem;
+    font: inherit;
+    cursor: pointer;
+    width: 200px;
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  .app{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit,400px);
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .item {
+    width: 100%;
+    height: 350px ;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .item img{
+    width: 100%;
+    height: 100%;
+  }
+  
+  button:hover,
+  button:active {
+    background: #790fa3;
+    border-color: #790fa3;
+  }
+ 

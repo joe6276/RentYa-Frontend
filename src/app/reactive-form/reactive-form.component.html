@@ -7,14 +7,21 @@
                     <label for="name"> Name</label>
                     <input type="text" formControlName="name" />
                 </div>
-                <div class="error" *ngIf="!form.get('personalDetails.name')?.valid && form.get('personalDetails.name')?.touched">
+                <div class="error" *ngIf="!form.get('personalDetails.name')?.valid &&
+                 form.get('personalDetails.name')?.touched">
                      <p *ngIf="form.get('personalDetails.name')!.errors!['required']"> name is required*</p>
                      <p *ngIf="form.get('personalDetails.name')!.errors!['unallowedName']">Username not allowed!!</p> 
                 </div>
                 <div class="form-group">
                     <label for="name"> Email</label>
                     <input type="email" formControlName="email" />
-                    <p class="error" *ngIf="!form.get('personalDetails.email')?.valid && form.get('personalDetails.email')?.touched">Email is required*</p>
+                    <div class="error" *ngIf="!form.get('personalDetails.email')?.valid &&
+                     form.get('personalDetails.email')?.touched
+                     && form.get('personalDetails.email')?.errors"
+                    >
+                        <p *ngIf="form.get('personalDetails.email')?.errors!['required']"> Email is required*</p>
+                        <p *ngIf="form.get('personalDetails.email')?.errors!['emailUnallowed']">Email not allowed!!</p> 
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="name"> Password</label>
@@ -52,9 +59,16 @@
                 <label for="name"> Message</label>
                <textarea id="" rows="3" formControlName="message" ></textarea>
             </div>
+                <div formArrayName="langOptions">
+            <div *ngFor="let opt of options " >
+                <input type="radio" [value]="opt" (change)="onChange($event)" id="">
+                <label for="">{{opt}}</label>
+            </div>
+        </div>
             <!-- /[disabled]="!form.valid -->
             <button type="submit"  >Submit</button>
         </div>
+
     </form>
     </div> 
 
