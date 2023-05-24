@@ -1,3 +1,4 @@
+import { Observable } from "rxjs"
 
 
 export interface Movie{
@@ -7,4 +8,8 @@ export interface Movie{
     description:string
     image:string
     price:number
+}
+
+export interface CanComponentDeactivate{
+    canDeactive:()=>boolean | Observable<boolean> | Promise<boolean>
 }

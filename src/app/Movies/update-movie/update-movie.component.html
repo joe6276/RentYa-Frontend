@@ -3,7 +3,7 @@
         <img src="https://i.ytimg.com/vi/d2k4QAItiSA/maxresdefault.jpg" alt="">
       
     </div>
-    <h1>{{title}}</h1>
+        <div class="item">
         <div class="form-group">
             <label for="name"> Title</label>
             <input type="text" [(ngModel)]="movieName" />
@@ -24,8 +24,10 @@
             <input type="text" [(ngModel)]="image" />
         </div>
 
+        <button (click)="onSubmit()">Update</button>
+    </div>
        
-        <button (click)="onSubmit()">Submit</button>
+       
     
  
 </div>

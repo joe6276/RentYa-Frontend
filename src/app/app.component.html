@@ -2,14 +2,14 @@
 <div class="container">
     <div class="links">
         <li><a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home Page</a></li>
-        <li><a routerLink="category" routerLinkActive="active">Movies</a></li>
-        <li><a [routerLink]="['/addMovie']" routerLinkActive="active">Add Movie</a></li>
+        <li *ngIf="authService.getStatus()"><a routerLink="category" routerLinkActive="active">Movies</a></li>
+        <li *ngIf="authService.getStatus()"><a [routerLink]="['/addMovie']" routerLinkActive="active">Add Movie</a></li>
         
     </div>
 
     <div class="links1">
-        <li><a href="">Login</a></li>
-        <li><a href="">Logout</a></li> 
+        <li *ngIf="!authService.getStatus()"><a (click)="authService.login()" >Login</a></li>
+        <li *ngIf="authService.getStatus()" ><a (click)="authService.logout()">Logout</a></li> 
     </div>
 </div>
 

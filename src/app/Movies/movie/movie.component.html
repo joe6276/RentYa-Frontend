@@ -5,6 +5,7 @@
 
     <div class="item">
             <h1>{{movie.movieName}}</h1>
-            <p>u{{movie.description}}</p>
+            <p>{{movie.description}}</p>
+            <li><a [routerLink]="['/category' ,'movie', 'update', movie.id]" [queryParams]="{show:true}" >Update</a></li>
     </div>
 </div>
