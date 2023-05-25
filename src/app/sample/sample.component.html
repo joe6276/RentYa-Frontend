@@ -1,0 +1,5 @@
+<button  (click)="show()" [@buttonTrigger]="state">Show Paragraph</button>
+
+<ul>
+    <li *ngFor="let item of items ; let i=index" [@listTrigger]="state1" (click)="delete(i)">{{item}}</li>
+</ul>

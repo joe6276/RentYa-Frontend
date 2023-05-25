@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from './Services/auth.service';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +9,8 @@ import { AuthService } from './Services/auth.service';
 })
 export class AppComponent {
   title = 'RentYa';
+
   constructor(public authService:AuthService){}
+
+  
 }
